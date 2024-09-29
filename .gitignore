@@ -1,3 +1,5 @@
+TODO.md
+
 # Byte-compiled / optimized / DLL files
 .idea/
 __pycache__/
@@ -125,9 +127,9 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
+backend/env/
 venv/
-ENV/
+backend/env/
 env.bak/
 venv.bak/
 
