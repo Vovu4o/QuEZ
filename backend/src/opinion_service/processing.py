@@ -59,9 +59,9 @@ def cluster_words_with_vectors(words,n, navec):
 
 
 
-def cluster_dict_to_compact_dict(cluster_dict):
+def cluster_dict_to_compact_dict(cluster_dict,n_clusters):
   compact_dict = {}
-  for cluster_id in range(10):
+  for cluster_id in range(n_clusters):
     cluster = cluster_dict[cluster_id]
     all_words = [word for sublist in cluster for word in sublist]
     uniq = []
@@ -111,7 +111,7 @@ def kw_from_file(file):
         n_clusters = 10
     clusters = cluster_words_with_vectors(ans, n_clusters, navec)
 
-    ans = cluster_dict_to_compact_dict(clusters)
+    ans = cluster_dict_to_compact_dict(clusters,n_clusters)
     #with open("QuEZ.json", 'w', encoding='utf-8') as f:
         # json.dump(ans, f, ensure_ascii=False, indent=4)
     return ans
