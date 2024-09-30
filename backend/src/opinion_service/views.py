@@ -14,6 +14,6 @@ async def index():
 @router.post("/upload_opinion/")
 async def upload_opinion_file(file: UploadFile, background_tasks: BackgroundTasks):
     start = time.time()
-    content = await file.read()
+    content = file.file
     background_tasks.add_task(get_keywords, content)
-    return {"filename": file.filename, "content_type": file.content_type, 'time': time.time() - start}
+    return {"result": time.time() - start}

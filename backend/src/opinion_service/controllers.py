@@ -2,11 +2,10 @@ import asyncio
 import time
 from fastapi import UploadFile
 
+from .processing import kw_from_file
 
-async def parse_opinion_file(file: UploadFile):
-    content = await file.read()
-    await asyncio.sleep(1)
+async def get_keywords(content):
+    ans_json = kw_from_file(content)
+    return ans_json
 
-def get_keywords(content):
-    time.sleep(3)
-    return content
+
