@@ -20,9 +20,9 @@ This project implements a Python script for extracting keyphrases from customer 
 - [Scikit-learn](https://pypi.org/project/scikit-learn/)
 - [NLTK](https://pypi.org/project/nltk/)
 
-  ## Setup
+## Setup
 
-1. **Install required packages:**
+1. **Install required packages:**\n
    !pip install yake
    !pip install navec
    !pip install pymystem3
