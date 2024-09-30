@@ -1,6 +1,5 @@
 up:
-	docker-compose 0up
-
+	docker-compose up
 down:
 	docker-compose down && docker network prune --force
 
