@@ -1,0 +1,5 @@
+version: "3.0"
+services:
+  networks:
+  custom:
+    driver: bridge
