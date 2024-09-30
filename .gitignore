@@ -1,15 +1,6 @@
 TODO.md
 # javascript ignore
-node_modules
-
-.idea/*
-.vscode/
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-build
+node_modules/
 
 # Byte-compiled / optimized / DLL files
 .idea/
