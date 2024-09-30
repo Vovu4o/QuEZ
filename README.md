@@ -22,7 +22,8 @@ This project implements a Python script for extracting keyphrases from customer 
 
 ## Setup
 
-1. **Install required packages:**\n
+1. **Install required packages:**
+   '''bash
    !pip install yake
    !pip install navec
    !pip install pymystem3
@@ -32,11 +33,11 @@ This project implements a Python script for extracting keyphrases from customer 
    !pip install numpy
    !pip install csv
    !pip install json
-   
-2. **Download the NaVec model:**
+   '''bash
+3. **Download the NaVec model:**
    !wget https://storage.yandexcloud.net/natasha-navec/packs/navec_hudlit_v1_12B_500K_300d_100q.tar
    
-3. **Import required packages and load the NaVec model**:
+4. **Import required packages and load the NaVec model**:
    import yake
    from pymystem3 import Mystem
    from tqdm import tqdm
