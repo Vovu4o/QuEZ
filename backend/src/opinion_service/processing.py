@@ -3,20 +3,29 @@ import yake
 from pymystem3 import Mystem
 from tqdm import tqdm
 from joblib import Parallel, delayed
-import pandas as pd
 from sklearn.cluster import KMeans
 import numpy as np
 import csv
 import json
+from navec import Navec
 
 
 
-def read_sentences_from_csv(content):
 
-  df = pd.read_csv(pd.io.common.BytesIO(content))
-  df_dict = df.to_dict()
-  sentences = list(df_dict['1'].values())
-  return sentences
+
+
+def read_sentences_from_csv(file):
+  sentences = []
+
+  # print(file._file.getvalue())
+  # reader = csv.reader(file)
+  # for row in reader:
+  #     sentences.append(row[0])
+  # with io.BufferedReader(file._file) as csvfile:
+  #   reader = csv.reader(csvfile)
+  #   for row in reader:
+  #     sentences.append(row[0])
+  # return sentences
 
 # filename = 'sentences.csv'
 # newlst = read_sentences_from_csv(filename)
@@ -38,13 +47,9 @@ def lemmatize(text):
 
 
 def cluster_words_with_vectors(words,n, navec):
-    print("Start learn")
     vectors = [navec[word[0]] for word in words if word[0] in navec]
-
     kmeans = KMeans(n_clusters=n, random_state=0)
-
     clusters = kmeans.fit_predict(vectors)
-    print("End learn")
     clustered_words = {}
     for i, cluster_id in enumerate(clusters):
         if cluster_id not in clustered_words:
@@ -74,9 +79,12 @@ def cluster_dict_to_compact_dict(cluster_dict):
     compact_dict[key] = len(all_words)
   return compact_dict
 
-def kw_from_file(file, navec):
-
-
+def kw_from_file(file):
+    path = 'opinion_service/navec_hudlit_v1_12B_500K_300d_100q.tar'
+    import os
+    # print(os.getcwd())
+    navec = Navec.load(path)
+    print(file)
     newlst = read_sentences_from_csv(file)
 
     extractor = yake.KeywordExtractor(
@@ -104,4 +112,6 @@ def kw_from_file(file, navec):
     clusters = cluster_words_with_vectors(ans, n_clusters, navec)
 
     ans = cluster_dict_to_compact_dict(clusters)
+    #with open("QuEZ.json", 'w', encoding='utf-8') as f:
+        # json.dump(ans, f, ensure_ascii=False, indent=4)
     return ans
