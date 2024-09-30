@@ -37,17 +37,17 @@ This project implements a Python script for extracting keyphrases from customer 
    !wget https://storage.yandexcloud.net/natasha-navec/packs/navec_hudlit_v1_12B_500K_300d_100q.tar
    
 4. **Import required packages and load the NaVec model**:
-   import yake
-   from pymystem3 import Mystem
-   from tqdm import tqdm
-   from joblib import Parallel, delayed
-   from sklearn.cluster import KMeans
-   import numpy as np
-   import csv
-   import json
-   from navec import Navec
-   path = '/content/navec_hudlit_v1_12B_500K_300d_100q.tar'
-   navec = Navec.load(path)
+   - import yake
+   - from pymystem3 import Mystem
+   - from tqdm import tqdm
+   - from joblib import Parallel, delayed
+   - from sklearn.cluster import KMeans
+   - import numpy as np
+   - import csv
+   - import json
+   - from navec import Navec
+   - path = '/content/navec_hudlit_v1_12B_500K_300d_100q.tar'
+   - navec = Navec.load(path)
 
 ## Usage
 
@@ -59,16 +59,16 @@ This project implements a Python script for extracting keyphrases from customer 
 ## Example
 
 **Input (sentences.csv):**
-    Меня мотивирует возможность работать в команде профессионалов.
-    Я стремлюсь к профессиональному развитию, которое ваша компания предлагает.
-    Я ценю возможность внести свой вклад в успешное будущее компании.
-    Меня привлекает динамичная и творческая атмосфера в вашей компании.
-    Ваши ценности и миссия совпадают с моими личными ценностями.
-    Я верю в потенциал компании и хочу быть частью ее роста.
-    Ваша компания известна своим инновационным подходом, что меня вдохновляет.
-    Мне нравится, что компания фокусируется на [отрасль/сфера деятельности].
-    Я впечатлен вашим вниманием к сотрудникам и созданием благоприятной рабочей среды.
-    Ваша компания предоставляет отличные возможности для обучения и развития.
+    - Меня мотивирует возможность работать в команде профессионалов.
+    - Я стремлюсь к профессиональному развитию, которое ваша компания предлагает.
+    - Я ценю возможность внести свой вклад в успешное будущее компании.
+    - Меня привлекает динамичная и творческая атмосфера в вашей компании.
+    - Ваши ценности и миссия совпадают с моими личными ценностями.
+    - Я верю в потенциал компании и хочу быть частью ее роста.
+    - Ваша компания известна своим инновационным подходом, что меня вдохновляет.
+    - Мне нравится, что компания фокусируется на [отрасль/сфера деятельности].
+    - Я впечатлен вашим вниманием к сотрудникам и созданием благоприятной рабочей среды.
+    - Ваша компания предоставляет отличные возможности для обучения и развития.
 
 **Output (QuEZ.json):**
     {'ценность': 1, 
