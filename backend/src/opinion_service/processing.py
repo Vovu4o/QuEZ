@@ -80,11 +80,6 @@ def cluster_dict_to_compact_dict(cluster_dict):
   return compact_dict
 
 def kw_from_file(file):
-    path = 'opinion_service/navec_hudlit_v1_12B_500K_300d_100q.tar'
-    import os
-    # print(os.getcwd())
-    navec = Navec.load(path)
-    print(file)
     newlst = read_sentences_from_csv(file)
 
     extractor = yake.KeywordExtractor(
@@ -112,6 +107,4 @@ def kw_from_file(file):
     clusters = cluster_words_with_vectors(ans, n_clusters, navec)
 
     ans = cluster_dict_to_compact_dict(clusters)
-    #with open("QuEZ.json", 'w', encoding='utf-8') as f:
-        # json.dump(ans, f, ensure_ascii=False, indent=4)
     return ans
