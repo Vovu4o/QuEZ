@@ -2,7 +2,12 @@
 ![Logo](https://github.com/Vovu4o/QuEZ/blob/main/q.png?raw=true)
 
 ## Description
-This project implements a Python script for extracting keyphrases from reviews and clustering them to generate a meaningful word cloud. 
+Raw data from **survey** results are often redundant and include many synonyms, colloquialisms, or even obscene language. This project implements an algorithm for analyzing the totality of survey results, converting raw data into an interpreted **word cloud** to facilitate their analysis. A distinctive feature of the presented solution is that the algorithm does **not use neural networks**, which significantly speeds up its work. In addition, a **web service** has been implemented that can accept a **csv file** with survey results for processing and output a **json file** with a cloud of words (of the form: "main words of the cluster" - <number of words in the cluster>).
+
+## Creators (MaLkuTeam):
+- Konstantin Kislov (telegram: @Kislov_Konstantin) - AI
+- Kovalenko Vladimir (telegram: @username_049) - backend, fronted
+- Timokhin Ivan (telegram: @ssstrudel) - fronted, design
 
 ## Features
 
@@ -99,9 +104,9 @@ This project implements a Python script for extracting keyphrases from reviews a
       return clustered_words
 
    #Converting the dictionary of the received clusters into the dictionary of the interpreted word cloud:
-   def cluster_dict_to_compact_dict(cluster_dict):
+   def cluster_dict_to_compact_dict(cluster_dict,n_clusters):
       compact_dict = {}
-      for cluster_id in range(10):
+      for cluster_id in range(n_clusters):
       cluster = cluster_dict[cluster_id]
       all_words = [word for sublist in cluster for word in sublist]
       uniq = []
@@ -142,11 +147,11 @@ This project implements a Python script for extracting keyphrases from reviews a
       if n_clusters > 10:
          n_clusters = 10
       clusters = cluster_words_with_vectors(ans, n_clusters, navec)
-      ans = cluster_dict_to_compact_dict(clusters)
+      ans = cluster_dict_to_compact_dict(clusters,n_clusters)
       return ans
 
    #Main:
-   file = "input_your_csv_file_path"
+   file = "input_your_csv_file_path.csv"
    key_dict = kw_from_file(file,navec)
    with open("QuEZ.json", 'w', encoding='utf-8') as f:
       json.dump(key_dict, f, ensure_ascii=False, indent=4)
@@ -156,7 +161,7 @@ This project implements a Python script for extracting keyphrases from reviews a
 
 ## Example
 
-**Input (sentences.csv):**
+**Input (input.csv):**
    ```
     Меня мотивирует возможность работать в команде профессионалов.
     Я стремлюсь к профессиональному развитию, которое ваша компания предлагает.
