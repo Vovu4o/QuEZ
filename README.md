@@ -1,8 +1,8 @@
 # MaLkuTeam presents: QuEZ - Fast Keyphrase Extraction and Clustering from Reviews
-![Лого](blob:https://web.telegram.org/28ce96f3-2efa-4f5e-9888-c2cd30bc8289)
+![Logo](https://github.com/Vovu4o/QuEZ/blob/main/q.png?raw=true)
 
 ## Description
-This project implements a Python script for extracting keyphrases from customer reviews and clustering them to generate a meaningful word cloud. 
+This project implements a Python script for extracting keyphrases from reviews and clustering them to generate a meaningful word cloud. 
 
 ## Features
 
@@ -11,7 +11,7 @@ This project implements a Python script for extracting keyphrases from customer 
 - **Word Embedding:** Leverages the NaVec pre-trained word embedding model for representing words as vectors.
 - **Clustering:** Employs KMeans clustering to group similar keyphrases together.
 - **Result Visualization:** Generates a concise output summarizing the extracted keyphrases and their clusters in a JSON file.
-- **Spead:** The API-wrapped solution processes 1000 reviews in 5 seconds or less, with local use of the script, the running time is reduced to 2-3 seconds.
+- **Speed:** The API-wrapped solution processes 1000 reviews in 5 seconds or less, with local use of the script, the running time is reduced to 2-3 seconds.
 
 ## Requirements
 
@@ -23,6 +23,9 @@ This project implements a Python script for extracting keyphrases from customer 
 - [Tqdm](https://pypi.org/project/tqdm/)
 - [Scikit-learn](https://pypi.org/project/scikit-learn/)
 - [NLTK](https://pypi.org/project/nltk/)
+
+## Usage via the website
+...
 
 ## Local Usage
 
