@@ -1,0 +1,15 @@
+version: "3.0"
+services:
+    luchanos_oxford_university_app:
+        container_name: quez_app
+        image: quez_app # Specify the name of the Docker image to be built
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+        networks:
+            - custom
+networks:
+  custom:
+    driver: bridge

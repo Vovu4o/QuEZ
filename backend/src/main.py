@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 import time
 import uvicorn
 from fastapi import FastAPI, APIRouter, UploadFile, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
 from navec import Navec
 from opinion_service.controllers import get_keywords
 
@@ -33,19 +34,26 @@ def start_app(debug):
         return {"result": time.time() - start, "ans": ans}
 
     app.include_router(opinion_router)
-    return app
+    origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:8888"
+    ]
 
-<<<<<<< HEAD
-app = start_app()
-"""if __name__ == "__main__":
-    app = start_app()
-    uvicorn.run(app=app, host='127.0.0.1', port=8000)"""
-=======
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+        )
+    return app
 
 
 if __name__ == "__main__":
-    app = start_app(True)
-    uvicorn.run(app=app, host='127.0.0.1', port=8000)
->>>>>>> 946fd0f53c5853211a3695fb81cdd1049d8640fe
+    app = start_app(False)
+    uvicorn.run(app=app, host='localhost', port=8888)
 
 
