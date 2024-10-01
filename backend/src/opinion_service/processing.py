@@ -1,5 +1,4 @@
 import io
-
 import pandas as pd
 import yake
 from pymystem3 import Mystem
@@ -100,3 +99,9 @@ def kw_from_file(file, navec):
 
     ans = cluster_dict_to_compact_dict(clusters)
     return ans
+
+
+async def get_keywords(content, navec):
+    csv = io.BytesIO(content)
+    ans_json = kw_from_file(content, navec)
+    return ans_json

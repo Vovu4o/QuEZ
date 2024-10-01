@@ -1,10 +1,13 @@
 from contextlib import asynccontextmanager
 import time
 import uvicorn
-from fastapi import FastAPI, APIRouter, UploadFile, BackgroundTasks
+from fastapi import FastAPI, APIRouter, UploadFile
+from fastapi.responses import HTMLResponse
+from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
 from navec import Navec
-from opinion_service.controllers import get_keywords
+from .opinion_service.processing import get_keywords
 
 
 MODELS = {}
@@ -19,27 +22,35 @@ async def lifespan(app: FastAPI):
 def start_app(debug):
 
     app = FastAPI(lifespan=lifespan, debug=debug)
-    opinion_router = APIRouter()
+    templates = Jinja2Templates(directory="templates")
+    opinion_router = APIRouter(prefix="/api")
+    site_router = APIRouter()
+
+    @site_router.get("/", response_class=HTMLResponse)
+    async def index(request: Request):
+        return templates.TemplateResponse("index.html", {"request": request})
+
+    @site_router.get("/upload_opinion", response_class=HTMLResponse)
+    async def upload_opinion(request: Request):
+        return templates.TemplateResponse("upload_opinion.html", {"request": request})
 
     @opinion_router.get("/")
-    async def index():
-        return {"Message": "page of opinions"}
+    async def api_index():
+        return {"message": "ok!"}
 
     @opinion_router.post("/upload_opinion/")
-    async def upload_opinion_file(file: UploadFile, background_tasks: BackgroundTasks):
+    async def api_upload_opinion_file(file: UploadFile):
         start = time.time()
         content = await file.read()
-        # background_tasks.add_task(get_keywords, content, navec)
         ans = await get_keywords(content, MODELS["navec"])
-        return {"result": time.time() - start, "ans": ans}
+        return {"time": time.time() - start, "opinion_keywords": ans}
 
     app.include_router(opinion_router)
+    app.include_router(site_router)
     origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
-    "http://localhost:8000",
-    "http://localhost:8888"
+        "http://localhost",
+        "http://localhost:8000",
+        "http://localhost:8888"
     ]
 
     app.add_middleware(
@@ -47,8 +58,9 @@ def start_app(debug):
         allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
-        allow_headers=["*"],
-        )
+        allow_headers=["*"]
+    )
+
     return app
 
 
