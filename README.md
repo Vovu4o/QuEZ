@@ -1,3 +1,4 @@
+![](blob:https://web.telegram.org/28ce96f3-2efa-4f5e-9888-c2cd30bc8289)
 # MaLkuTeam presents: QuEZ - Fast Keyphrase Extraction and Clustering from Reviews
 
 This project implements a Python script for extracting keyphrases from customer reviews and clustering them to generate a meaningful word cloud. 
@@ -40,7 +41,6 @@ This project implements a Python script for extracting keyphrases from customer 
    ```
 5. **Import required packages and load the NaVec model**:
    ```
-   import io
    import pandas as pd
    import yake
    from pymystem3 import Mystem
@@ -61,9 +61,11 @@ This project implements a Python script for extracting keyphrases from customer 
    ```
    #Reading reviews from a csv file:
    def read_sentences_from_csv(content):
-      df = pd.read_csv(pd.io.common.BytesIO(content))
-      df_dict = df.to_dict()
-      sentences = list(df_dict['1'].values())
+      sentences = []
+      with open(filename, 'r', newline='', encoding='utf-8') as csvfile:
+         reader = csv.reader(csvfile)
+         for row in reader:
+            sentences.append(row[0])
       return sentences
 
    #Defining the initial form of keywords:
