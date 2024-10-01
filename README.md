@@ -13,7 +13,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 
 - **Keyphrase Extraction:** Uses the YAKE algorithm for extracting keyphrases from text.
 - **Lemmatization:** A method from the PyMystem3 determines the initial form of a word.
-- **Word Embedding:** Leverages the NaVec pre-trained word embedding model for representing words as vectors.
+- **Word Embedding:** Leverages the Navec pre-trained word embedding model for representing words as vectors.
 - **Clustering:** Employs KMeans clustering to group similar keyphrases together.
 - **Result Visualization:** Generates a concise output summarizing the extracted keyphrases and their clusters in a JSON file.
 - **Speed:** The API-wrapped solution processes 1000 reviews in 5 seconds or less, with local use of the script, the running time is reduced to 2-3 seconds.
@@ -22,7 +22,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 
 - Python 3.6+
 - [YAKE](https://pypi.org/project/yake/) 
-- [NaVec](https://github.com/natasha/navec) 
+- [Navec](https://github.com/natasha/navec) 
 - [PyMystem3](https://pypi.org/project/pymystem3/)
 - [Joblib](https://pypi.org/project/joblib/)
 - [Tqdm](https://pypi.org/project/tqdm/)
