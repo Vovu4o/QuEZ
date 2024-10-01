@@ -23,7 +23,7 @@ This project implements a Python script for extracting keyphrases from customer 
 ## Setup
 
 1. **Install required packages:**
-'''
+   ```
    !pip install yake
    !pip install navec
    !pip install pymystem3
@@ -31,33 +31,38 @@ This project implements a Python script for extracting keyphrases from customer 
    !pip install joblib
    !pip install sklearn
    !pip install numpy
-'''
+   ```
 3. **Download the NaVec model:**
+   ```
    !wget https://storage.yandexcloud.net/natasha-navec/packs/navec_hudlit_v1_12B_500K_300d_100q.tar
-   
-4. **Import required packages and load the NaVec model**:
-   - import yake
-   - from pymystem3 import Mystem
-   - from tqdm import tqdm
-   - from joblib import Parallel, delayed
-   - from sklearn.cluster import KMeans
-   - import numpy as np
-   - import csv
-   - import json
-   - from navec import Navec
-   - path = '/content/navec_hudlit_v1_12B_500K_300d_100q.tar'
-   - navec = Navec.load(path)
-
+   ```
+5. **Import required packages and load the NaVec model**:
+   ```
+   import yake
+   from pymystem3 import Mystem
+   from tqdm import tqdm
+   from joblib import Parallel, delayed
+   from sklearn.cluster import KMeans
+   import numpy as np
+   import csv
+   import json
+   from navec import Navec
+   path = '/content/navec_hudlit_v1_12B_500K_300d_100q.tar'
+   navec = Navec.load(path)
+   ```
 ## Usage
 
 1. **Prepare your review data:** Create a CSV file named reviews.csv with one review per line.
 2. **Run the script:**
+   ```
    python QuEZ.py
-3. **Output:** The script will output a JSON file named QuEZ.json containing the main words from the clusters and the number of words in each.
+   ```
+4. **Output:** The script will output a JSON file named QuEZ.json containing the main words from the clusters and the number of words in each.
 
 ## Example
 
 **Input (sentences.csv):**
+   ```
     Меня мотивирует возможность работать в команде профессионалов.
     Я стремлюсь к профессиональному развитию, которое ваша компания предлагает.
     Я ценю возможность внести свой вклад в успешное будущее компании.
@@ -68,8 +73,10 @@ This project implements a Python script for extracting keyphrases from customer 
     Мне нравится, что компания фокусируется на [отрасль/сфера деятельности].
     Я впечатлен вашим вниманием к сотрудникам и созданием благоприятной рабочей среды.
     Ваша компания предоставляет отличные возможности для обучения и развития.
+   ```
 
 **Output (QuEZ.json):**
+   ```
     {'ценность': 1, 
      'компания': 2, 
      'подход': 1, 
@@ -78,3 +85,4 @@ This project implements a Python script for extracting keyphrases from customer 
      'отрасль': 1, 
      'профессионал': 1, 
      'развитие': 1}
+   ```
