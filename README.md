@@ -20,7 +20,7 @@ This project implements a Python script for extracting keyphrases from customer 
 - [Scikit-learn](https://pypi.org/project/scikit-learn/)
 - [NLTK](https://pypi.org/project/nltk/)
 
-## Setup
+## Local Usage
 
 1. **Install required packages:**
    ```
@@ -38,24 +38,26 @@ This project implements a Python script for extracting keyphrases from customer 
    ```
 5. **Import required packages and load the NaVec model**:
    ```
+   import io
+   import pandas as pd
    import yake
    from pymystem3 import Mystem
    from tqdm import tqdm
    from joblib import Parallel, delayed
    from sklearn.cluster import KMeans
    import numpy as np
+   import pandas as pd
    import csv
    import json
    from navec import Navec
    path = '/content/navec_hudlit_v1_12B_500K_300d_100q.tar'
    navec = Navec.load(path)
    ```
-## Usage
+6. **Prepare your review data:** Create a CSV file named reviews.csv with one review per line.
 
-1. **Prepare your review data:** Create a CSV file named reviews.csv with one review per line.
-2. **Run the script:**
+7. **Run the script:**
    ```
-   python QuEZ.py
+   ll
    ```
 4. **Output:** The script will output a JSON file named QuEZ.json containing the main words from the clusters and the number of words in each.
 
