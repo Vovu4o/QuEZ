@@ -9,6 +9,7 @@ This project implements a Python script for extracting keyphrases from customer 
 - **Word Embedding:** Leverages the NaVec pre-trained word embedding model for representing words as vectors.
 - **Clustering:** Employs KMeans clustering to group similar keyphrases together.
 - **Result Visualization:** Generates a concise output summarizing the extracted keyphrases and their clusters in a JSON file.
+- **Spead:** The API-wrapped solution processes 1000 reviews in 5 seconds or less, with local use of the script, the running time is reduced to 2-3 seconds.
 
 ## Requirements
 
@@ -17,6 +18,7 @@ This project implements a Python script for extracting keyphrases from customer 
 - [NaVec](https://github.com/natasha/navec) 
 - [PyMystem3](https://pypi.org/project/pymystem3/)
 - [Joblib](https://pypi.org/project/joblib/)
+- [Tqdm](https://pypi.org/project/tqdm/)
 - [Scikit-learn](https://pypi.org/project/scikit-learn/)
 - [NLTK](https://pypi.org/project/nltk/)
 
@@ -110,6 +112,7 @@ This project implements a Python script for extracting keyphrases from customer 
          key = uniq[0]
       compact_dict[key] = len(all_words)
       return compact_dict
+   
    #Pipeline:
    def kw_from_file(file, navec):
       newlst = read_sentences_from_csv(file)
@@ -119,7 +122,6 @@ This project implements a Python script for extracting keyphrases from customer 
          dedupLim=0.3,
          top=1
       )
-
       for i in range(len(newlst)):
          newlst[i] = newlst[i].lower()
       ans = []
@@ -136,6 +138,13 @@ This project implements a Python script for extracting keyphrases from customer 
       clusters = cluster_words_with_vectors(ans, n_clusters, navec)
       ans = cluster_dict_to_compact_dict(clusters)
       return ans
+
+   #Main:
+   file = "input_your_csv_file_path"
+   key_dict = kw_from_file(file,navec)
+   with open("QuEZ.json", 'w', encoding='utf-8') as f:
+      json.dump(key_dict, f, ensure_ascii=False, indent=4)
+   #End of the script
    ```
 4. **Output:** The script will output a JSON file named QuEZ.json containing the main words from the clusters and the number of words in each.
 
