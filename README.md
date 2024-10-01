@@ -1,4 +1,4 @@
-![](blob:https://web.telegram.org/28ce96f3-2efa-4f5e-9888-c2cd30bc8289)
+![Лого](blob:https://web.telegram.org/28ce96f3-2efa-4f5e-9888-c2cd30bc8289)
 # MaLkuTeam presents: QuEZ - Fast Keyphrase Extraction and Clustering from Reviews
 
 This project implements a Python script for extracting keyphrases from customer reviews and clustering them to generate a meaningful word cloud. 
