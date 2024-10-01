@@ -2,7 +2,7 @@
 ![Logo](https://github.com/Vovu4o/QuEZ/blob/main/q.png?raw=true)
 
 ## Description
-Raw data from **survey** results are often redundant and include many synonyms, colloquialisms, or even obscene language. This project implements an algorithm for analyzing the totality of survey results, converting raw data into an interpreted **word cloud** to facilitate their analysis. A distinctive feature of the presented solution is that the algorithm does **not use neural networks**, which significantly speeds up its work. In addition, a **web service** has been implemented that can accept a **csv file** with survey results for processing and output a **json file** with a cloud of words (of the form: "main words of the cluster" - <number of words in the cluster>).
+Raw data from **survey** results are often redundant and include many synonyms, colloquialisms, or even obscene language. This project implements an algorithm for analyzing the totality of survey results, converting raw data into an interpreted **word cloud** to facilitate their analysis. A distinctive feature of the presented solution is that the algorithm does **not use neural networks**, which significantly speeds up its work. In addition, a **web service** has been implemented that can accept a **csv file** with survey results for processing and output a **json file** with a cloud of words (of the form: "main words of the cluster" - <number_of_words_in_the_cluster>).
 
 ## Creators (MaLkuTeam):
 - Konstantin Kislov (telegram: @Kislov_Konstantin) - AI
