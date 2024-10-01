@@ -1,5 +1,7 @@
 # MaLkuTeam presents: QuEZ - Fast Keyphrase Extraction and Clustering from Reviews
-![Лого](https://s.yimg.com/ny/api/res/1.2/3T1XvEA_vgmCf64w3yyvXw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD02OTk-/https://media.zenfs.com/en/toms_hardware_319/0b48b42cc84bf6d573cee31290fad41d)
+![Лого](blob:https://web.telegram.org/28ce96f3-2efa-4f5e-9888-c2cd30bc8289)
+
+## Description
 This project implements a Python script for extracting keyphrases from customer reviews and clustering them to generate a meaningful word cloud. 
 
 ## Features
