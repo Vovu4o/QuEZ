@@ -23,15 +23,15 @@ This project implements a Python script for extracting keyphrases from customer 
 ## Setup
 
 1. **Install required packages:**
-'''python
-   - !pip install yake
-   - !pip install navec
-   - !pip install pymystem3
-   - !pip install tqdm
-   - !pip install joblib
-   - !pip install sklearn
-   - !pip install numpy
-   
+'''
+   !pip install yake
+   !pip install navec
+   !pip install pymystem3
+   !pip install tqdm
+   !pip install joblib
+   !pip install sklearn
+   !pip install numpy
+'''
 3. **Download the NaVec model:**
    !wget https://storage.yandexcloud.net/natasha-navec/packs/navec_hudlit_v1_12B_500K_300d_100q.tar
    
