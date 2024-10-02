@@ -35,7 +35,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 ...
 
 ## Usage via the website
-[Demonstration]()
+[Demonstration](https://github.com/Vovu4o/QuEZ/blob/main/QuEZ_video_primer_site.mp4)
 
 ## Local Usage
 
