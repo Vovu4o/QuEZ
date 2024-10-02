@@ -16,6 +16,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 - **Word Embedding:** Leverages the Navec pre-trained word embedding model for representing words as vectors.
 - **Clustering:** Employs KMeans clustering to group similar keyphrases together.
 - **Result Visualization:** Generates a concise output summarizing the extracted keyphrases and their clusters in a JSON file.
+- **Language:** russian (including the words in english that are in the Navec model). 
 - **Speed:** The API-wrapped solution processes 1000 reviews in 5 seconds or less, with local use of the script, the running time is reduced to 2-3 seconds.
 
 ## Requirements
@@ -67,8 +68,8 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 6. **Prepare your review data:** Create a CSV file named reviews.csv with one review per line.
 
 7. **Run the script:**
+   - Reading reviews from a csv file:
    ```python
-   #Reading reviews from a csv file:
    def read_sentences_from_csv(content):
       sentences = []
       with open(filename, 'r', newline='', encoding='utf-8') as csvfile:
@@ -76,8 +77,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
          for row in reader:
             sentences.append(row[0])
       return sentences
-
-   #Defining the initial form of keywords:
+   ```
+   - Defining the initial form of keywords:
+   ```python
    def lemmatize(text):
       m = Mystem()
       merged_text = "|".join(text)
@@ -90,8 +92,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
             res.append(doc)
             doc = []
       return res
-   
-   #Clustering of keywords using the K-means algorithm and vector representations of words from the NaVec model:
+   ```
+   - Clustering of keywords using the K-means algorithm and vector representations of words from the NaVec model:
+   ```python
    def cluster_words_with_vectors(words,n, navec):
       vectors = [navec[word[0]] for word in words if word[0] in navec]
       kmeans = KMeans(n_clusters=n, random_state=0)
@@ -102,8 +105,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
             clustered_words[cluster_id] = []
          clustered_words[cluster_id].append(words[i])
       return clustered_words
-
-   #Converting the dictionary of the received clusters into the dictionary of the interpreted word cloud:
+   ```
+   - Converting the dictionary of the received clusters into the dictionary of the interpreted word cloud:
+   ```python
    def cluster_dict_to_compact_dict(cluster_dict,n_clusters):
       compact_dict = {}
       for cluster_id in range(n_clusters):
@@ -123,8 +127,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
          key = uniq[0]
       compact_dict[key] = len(all_words)
       return compact_dict
-   
-   #Pipeline:
+   ```
+   - Pipeline:
+   ```python
    def kw_from_file(file, navec):
       newlst = read_sentences_from_csv(file)
       extractor = yake.KeywordExtractor(
@@ -149,8 +154,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
       clusters = cluster_words_with_vectors(ans, n_clusters, navec)
       ans = cluster_dict_to_compact_dict(clusters,n_clusters)
       return ans
-
-   #Main:
+   ```
+   - Main:
+   ```python
    file = "input_your_csv_file_path.csv"
    key_dict = kw_from_file(file,navec)
    with open("QuEZ.json", 'w', encoding='utf-8') as f:
