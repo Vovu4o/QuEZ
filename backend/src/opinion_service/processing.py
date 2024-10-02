@@ -14,13 +14,12 @@ from navec import Navec
 
 
 
-def read_sentences_from_csv(content):
+async def read_sentences_from_csv(content):
     df = pd.read_csv(pd.io.common.BytesIO(content))
     df_dict = df.to_dict()
-    sentences = list(df_dict['1'].values())
-    #sentences = []
-    #for line in content.split("."):
-    #    sentences.append(line.split('"')[-1])
+    key = list(df_dict.keys())[0]
+    df_dict[key][-1] = key
+    sentences = list(df_dict[key].values())
     return sentences
 
 
@@ -74,8 +73,8 @@ def cluster_dict_to_compact_dict(cluster_dict):
     compact_dict[key] = len(all_words)
   return compact_dict
 
-def kw_from_file(file, navec):
-    newlst = read_sentences_from_csv(file)
+async def kw_from_file(file, navec):
+    newlst = await read_sentences_from_csv(file)
 
     extractor = yake.KeywordExtractor(
         lan="ru",
@@ -105,7 +104,7 @@ def kw_from_file(file, navec):
     return ans
 
 
-def get_keywords(content, navec):
+async def get_keywords(content, navec):
     csv = io.BytesIO(content)
-    ans_json = kw_from_file(content, navec)
+    ans_json = await kw_from_file(content, navec)
     return ans_json

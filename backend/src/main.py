@@ -3,6 +3,7 @@ import time
 import uvicorn
 from pydantic import BaseModel
 from fastapi import FastAPI, APIRouter, UploadFile, Form
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,15 +24,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, debug=True)
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 opinion_router = APIRouter(prefix="/api")
-site_router = APIRouter(prefix="/site")
+site_router = APIRouter()
 @site_router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@site_router.get("/upload_opinion", response_class=HTMLResponse)
-async def upload_opinion(request: Request):
-    return templates.TemplateResponse("upload_opinion.html", {"request": request})
+    return templates.TemplateResponse("main.html", {"request": request})
 
 
 @opinion_router.get("/")
@@ -45,18 +43,12 @@ async def api_upload_opinion_file(file: UploadFile):
     ans = await get_keywords(content, MODELS["navec"])
     return {"time": time.time() - start, "opinion_keywords": ans}
 
-"""@opinion_router.post("/upload_opinion")                                                                                                             
-async def api_upload_opinion_file(opinion: Annotated[Opinion, Form()]):                                                                                                
-    start = time.time()                                                                                                                             
-    content = opinion.text                                                                                                                     
-    ans = get_keywords(content, MODELS["navec"])                                                                                              
-    return {"time": time.time() - start, "opinion_keywords": ans}"""
+
 
 
 app.include_router(opinion_router)
 app.include_router(site_router)
 origins = [
-        #"79.174.84.209"
         "127.0.0.1"
         ]
 
@@ -67,5 +59,8 @@ app.add_middleware(
         allow_methods=["*"],
         allow_headers=["*"]
     )
+
+if __name__ == "__main__":
+    uvicorn.run(app=app, host='127.0.0.1', port=8000)
 
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект uEZ</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="nav">
+            <div id="home-btn" class="cloud active" onclick="showPage('home')">Главная</div>
+        </div>
+    </header>
+
+    <!-- Главная страница -->
+    <section id="home" class="page active">
+        <div class="logo">
+            <img src="{{ url_for('static', path='LOGO_FULL.png') }}" alt="QuEZ logo">
+        </div>
+        <div class="description">
+            <p>При проведении опросов важно не только собрать ответы, но и качественно проанализировать их, чтобы понять реальные мотивы и предпочтения людей.</p>
+            <p>Представим, что сотрудники отвечают на вопрос: «Что мотивирует вас работать больше?» Ответы могут быть самыми разными: «команда», «коллеги», «зарплата», «бабочки», «шеф», «атмосфера», «амбициозные задачи» и т.д. Сырые данные зачастую избыточны и включают множество синонимов, просторечий или даже нецензурной лексики.</p>
+            <p>Мы разработали систему на основе ИИ, которая анализирует список пользовательских ответов и возвращает понятное и интерпретируемое облако слов.</p>
+        </div>
+    </section>
+
+    <!-- Страница Анализ -->
+    <section id="analysis" class="page">
+        <form action="/site/upload_opinion" method="post">
+        <div class="upload-box">
+            <p>Перетащите файл</p>
+            <input type="file" id="fileInput" accept=".csv">
+        </div>
+        <div class="results">
+            {% if results %}
+                {% for result in results %}
+                    <p id="results">{{ result[0] }} - {{ result[1] }}</p>
+                {% endfor %}
+            {% else %}
+                <p id="wordList">*список слов будет отображаться здесь*</p>
+            {% endif %}
+        </div>
+        <input id="upload-btn" type="submit" value="upload">Загрузить результат</input>
+        </form>
+    </section>
+
+    <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+</html>

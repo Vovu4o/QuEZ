@@ -1,0 +1,113 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.nav .cloud {
+    width: 150px;
+    height: 80px;
+    background-image: url('oblako.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+/* Активная кнопка будет с градиентной заливкой
+.nav .cloud.active {
+    background: linear-gradient(45deg, #ed3b4b, #4c3b92);
+    -webkit-mask-image: url('oblako.png');
+    mask-image: url('oblako.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+} */
+
+/* Фон для кнопки "Главная" */
+#home-btn {
+    background-image: url('oblako.png');
+}
+
+/* Фон для кнопки "Анализ" */
+#analysis-btn {
+    background-image: url('oblako.png');
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Страница Главная */
+.logo img {
+    display: block;
+    margin: 0 auto; /* Центрирует изображение */
+    width: 100%; /* Логотип займет всю ширину контейнера */
+    max-width: 600px; /* Ограничивает максимальную ширину логотипа */
+    height: auto; /* Сохраняет пропорции логотипа */
+}
+
+.description {
+    margin: 50px auto;
+    max-width: 600px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+/* Страница Анализ */
+.upload-box {
+    border: 2px dashed #ed3b4b;
+    text-align: center;
+    padding: 50px;
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.results {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* #upload-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4c3b92;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    /* border-radius: 5px;
+} */
+
+#upload-btn:hover {
+    background-color: #ed3b4b;
+}
