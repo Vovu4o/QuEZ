@@ -1,5 +1,5 @@
 # MaLkuTeam presents: QuEZ - Fast Keyphrase Extraction and Clustering from Reviews
-![Logo](https://github.com/Vovu4o/QuEZ/blob/main/q.png?raw=true)
+![Logo](https://github.com/Vovu4o/QuEZ/blob/main/readme_white_red.png)
 
 ## Description
 Raw data from **survey** results are often redundant and include many synonyms, colloquialisms, or even obscene language. This project implements an algorithm for analyzing the totality of survey results, converting raw data into an interpreted **word cloud** to facilitate their analysis. A distinctive feature of the presented solution is that the algorithm does **not use neural networks**, which significantly speeds up its work. In addition, a **web service** has been implemented that can accept a **csv file** with survey results for processing and output a **json file** with a cloud of words (of the form: "main words of the cluster" - <number_of_words_in_the_cluster>).
@@ -35,7 +35,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 ## Local Usage
 
 1. **Install required packages:**
-   ```
+   ```python
    !pip install yake
    !pip install navec
    !pip install pymystem3
@@ -45,11 +45,11 @@ Raw data from **survey** results are often redundant and include many synonyms, 
    !pip install numpy
    ```
 3. **Download the NaVec model:**
-   ```
+   ```python
    !wget https://storage.yandexcloud.net/natasha-navec/packs/navec_hudlit_v1_12B_500K_300d_100q.tar
    ```
 5. **Import required packages and load the NaVec model**:
-   ```
+   ```python
    import pandas as pd
    import yake
    from pymystem3 import Mystem
@@ -67,7 +67,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 6. **Prepare your review data:** Create a CSV file named reviews.csv with one review per line.
 
 7. **Run the script:**
-   ```
+   ```python
    #Reading reviews from a csv file:
    def read_sentences_from_csv(content):
       sentences = []
