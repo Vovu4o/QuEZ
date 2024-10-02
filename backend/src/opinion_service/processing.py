@@ -18,6 +18,9 @@ def read_sentences_from_csv(content):
     df = pd.read_csv(pd.io.common.BytesIO(content))
     df_dict = df.to_dict()
     sentences = list(df_dict['1'].values())
+    #sentences = []
+    #for line in content.split("."):
+    #    sentences.append(line.split('"')[-1])
     return sentences
 
 
@@ -102,7 +105,7 @@ def kw_from_file(file, navec):
     return ans
 
 
-async def get_keywords(content, navec):
+def get_keywords(content, navec):
     csv = io.BytesIO(content)
     ans_json = kw_from_file(content, navec)
     return ans_json

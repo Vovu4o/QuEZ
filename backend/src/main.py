@@ -1,14 +1,15 @@
 from contextlib import asynccontextmanager
 import time
 import uvicorn
-from fastapi import FastAPI, APIRouter, UploadFile
+from pydantic import BaseModel
+from fastapi import FastAPI, APIRouter, UploadFile, Form
 from fastapi.responses import HTMLResponse
 from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from navec import Navec
-from .opinion_service.processing import get_keywords
-
+from opinion_service.processing import get_keywords
+from typing_extensions import Annotated
 
 MODELS = {}
 
@@ -19,53 +20,52 @@ async def lifespan(app: FastAPI):
     MODELS["navec"] = navec_model
     yield
 
-def start_app(debug):
 
-    app = FastAPI(lifespan=lifespan, debug=debug)
-    templates = Jinja2Templates(directory="templates")
-    opinion_router = APIRouter(prefix="/api")
-    site_router = APIRouter()
+app = FastAPI(lifespan=lifespan, debug=True)
+templates = Jinja2Templates(directory="templates")
+opinion_router = APIRouter(prefix="/api")
+site_router = APIRouter(prefix="/site")
+@site_router.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-    @site_router.get("/", response_class=HTMLResponse)
-    async def index(request: Request):
-        return templates.TemplateResponse("index.html", {"request": request})
+@site_router.get("/upload_opinion", response_class=HTMLResponse)
+async def upload_opinion(request: Request):
+    return templates.TemplateResponse("upload_opinion.html", {"request": request})
 
-    @site_router.get("/upload_opinion", response_class=HTMLResponse)
-    async def upload_opinion(request: Request):
-        return templates.TemplateResponse("upload_opinion.html", {"request": request})
 
-    @opinion_router.get("/")
-    async def api_index():
-        return {"message": "ok!"}
+@opinion_router.get("/")
+async def api_index():
+    return {"message": "ok!"}
 
-    @opinion_router.post("/upload_opinion/")
-    async def api_upload_opinion_file(file: UploadFile):
-        start = time.time()
-        content = await file.read()
-        ans = await get_keywords(content, MODELS["navec"])
-        return {"time": time.time() - start, "opinion_keywords": ans}
+@opinion_router.post("/upload_opinion")
+async def api_upload_opinion_file(file: UploadFile):
+    start = time.time()
+    content = await file.read()
+    ans = await get_keywords(content, MODELS["navec"])
+    return {"time": time.time() - start, "opinion_keywords": ans}
 
-    app.include_router(opinion_router)
-    app.include_router(site_router)
-    origins = [
-        "http://localhost",
-        "http://localhost:8000",
-        "http://localhost:8888"
-    ]
+"""@opinion_router.post("/upload_opinion")                                                                                                             
+async def api_upload_opinion_file(opinion: Annotated[Opinion, Form()]):                                                                                                
+    start = time.time()                                                                                                                             
+    content = opinion.text                                                                                                                     
+    ans = get_keywords(content, MODELS["navec"])                                                                                              
+    return {"time": time.time() - start, "opinion_keywords": ans}"""
 
-    app.add_middleware(
+
+app.include_router(opinion_router)
+app.include_router(site_router)
+origins = [
+        #"79.174.84.209"
+        "127.0.0.1"
+        ]
+
+app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"]
     )
-
-    return app
-
-
-if __name__ == "__main__":
-    app = start_app(False)
-    uvicorn.run(app=app, host='localhost', port=8888)
 
 
