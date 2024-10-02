@@ -28,7 +28,9 @@ Raw data from **survey** results are often redundant and include many synonyms, 
 - [Joblib](https://pypi.org/project/joblib/)
 - [Tqdm](https://pypi.org/project/tqdm/)
 - [Scikit-learn](https://pypi.org/project/scikit-learn/)
-- [NLTK](https://pypi.org/project/nltk/)
+
+## Git structure description
+...
 
 ## Usage via the website
 ...
@@ -93,7 +95,7 @@ Raw data from **survey** results are often redundant and include many synonyms, 
             doc = []
       return res
    ```
-   - Clustering of keywords using the K-means algorithm and vector representations of words from the NaVec model:
+   - Clustering of keywords using the K-means algorithm and vector representations of words from the Navec model:
    ```python
    def cluster_words_with_vectors(words,n, navec):
       vectors = [navec[word[0]] for word in words if word[0] in navec]
